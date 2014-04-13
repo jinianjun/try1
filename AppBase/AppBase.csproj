@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BF67BEB6-0D81-403E-8723-E4E15C463690}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AppBase</RootNamespace>
+    <AssemblyName>AppBase</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\AppLib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AppLib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Aop, Version=1.3.2.20943, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AppLib\Spring.Aop.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Core, Version=1.3.2.20943, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AppLib\Spring.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data, Version=1.3.2.20943, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AppLib\Spring.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data.NHibernate31, Version=1.3.2.35943, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AppLib\Spring.Data.NHibernate31.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdoBaseDao.cs" />
+    <Compile Include="Ado\Algorithms.cs" />
+    <Compile Include="Ado\Bag.cs" />
+    <Compile Include="Ado\CollectionBase.cs" />
+    <Compile Include="Ado\CollectionUtils.cs" />
+    <Compile Include="Ado\Comparers.cs" />
+    <Compile Include="Ado\DebugUtils.cs" />
+    <Compile Include="Ado\DisposableBase.cs" />
+    <Compile Include="Ado\EnumUtils.cs" />
+    <Compile Include="Ado\ExceptionUtils.cs" />
+    <Compile Include="Ado\FileSystemEnumerator .cs" />
+    <Compile Include="Ado\FileUtils.cs" />
+    <Compile Include="Ado\Hash.cs" />
+    <Compile Include="Ado\ListBase.cs" />
+    <Compile Include="Ado\MathUtils.cs" />
+    <Compile Include="Ado\MultiDictionary.cs" />
+    <Compile Include="Ado\MultiDictionaryBase.cs" />
+    <Compile Include="Ado\NamedNullMappingDataReader.cs" />
+    <Compile Include="Ado\Pair.cs" />
+    <Compile Include="Ado\ReadOnlyCollectionBase.cs" />
+    <Compile Include="Ado\ReflectionUtils.cs" />
+    <Compile Include="Ado\Set.cs" />
+    <Compile Include="Ado\Strings.cs" />
+    <Compile Include="Ado\StringUtils.cs" />
+    <Compile Include="Ado\ThreadUtils.cs" />
+    <Compile Include="Ado\Util.cs" />
+    <Compile Include="BaseDao.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="JSON\NHibernateProxyJsonSerializer.cs" />
+    <Compile Include="Sequence\ISequenceService.cs" />
+    <Compile Include="Sequence\SequenceService.cs" />
+    <Compile Include="Domain\Domain_SEQUENCE.cs" />
+    <Compile Include="IBaseDao.cs" />
+    <Compile Include="IBaseService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryParameter.cs" />
+    <Compile Include="SqlHelper.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

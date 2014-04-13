@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:db="http://www.springframework.net/database">
+    <!-- 我们的数据访问类，将HibernateTemplate注入进来-->
+
+    <!--应用(企业相关)信息-->
+    <object id="ApplicationDao" type="DAO.ApplicationDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AppConfigDao" type="DAO.AppConfigDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AppMenuDao" type="DAO.AppMenuDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AppStaticMenuDao" type="DAO.AppStaticMenuDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AppDctTypeDao" type="DAO.AppDctTypeDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AppDctTypeItemDao" type="DAO.AppDctTypeItemDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AppStaticDctTypeDao" type="DAO.AppStaticDctTypeDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AppStaticDctTypeItemDao" type="DAO.AppStaticDctTypeItemDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--组织机构-->
+    <object id="LoginUserDao" type="DAO.LoginUserDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="OrgDepartDao" type="DAO.OrgDepartDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="OrgPostDao" type="DAO.OrgPostDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="OrgPersonDao" type="DAO.OrgPersonDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <object id="OrgGroupDao" type="DAO.OrgGroupDao, DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AuthResourceServDao" type="DAO.AuthResourceServDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--授权(权限)-->
+    <object id="AuthRoleDao" type="DAO.AuthRoleDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AuthStaticOperateDctDao" type="DAO.AuthStaticOperateDctDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AuthPermissionDao" type="DAO.AuthPermissionDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AuthOperateDao" type="DAO.AuthOperateDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AuthResourceDao" type="DAO.AuthResourceDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="AuthResourceUrlDao" type="DAO.AuthResourceUrlDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--工作流-->
+    <object id="WorkFlowActivityDao" type="DAO.WorkFlowActivityDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowConfigDao" type="DAO.WorkFlowConfigDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowCurrentNodeDao" type="DAO.WorkFlowCurrentNodeDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowDao" type="DAO.WorkFlowDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowEntryDao" type="DAO.WorkFlowEntryDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowExpiredDao" type="DAO.WorkFlowExpiredDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowHistoryNodeDao" type="DAO.WorkFlowHistoryNodeDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowItemDao" type="DAO.WorkFlowItemDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowLineDao" type="DAO.WorkFlowLineDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowNodeDao" type="DAO.WorkFlowNodeDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowPolydotDao" type="DAO.WorkFlowPolydotDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowScriptTaskDao" type="DAO.WorkFlowScriptTaskDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowTaskDao" type="DAO.WorkFlowTaskDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowTaskFormDao" type="DAO.WorkFlowTaskFormDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowTaskPageDao" type="DAO.WorkFlowTaskPageDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowTaskUrlDao" type="DAO.WorkFlowTaskUrlDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowVariableDao" type="DAO.WorkFlowVariableDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="WorkFlowTaskUrlConfigDao" type="DAO.WorkFlowTaskUrlConfigDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--安监信息-->
+    <object id="NamedDao" type="DAO.NamedDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="NfilesDao" type="DAO.NfilesDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="NoticeDao" type="DAO.NoticeDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="NoticePersonDao" type="DAO.NoticePersonDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="NoticeFileDao" type="DAO.NoticeFileDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="UrgentReportDao" type="DAO.UrgentReportDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="UrfilesDao" type="DAO.UrfilesDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--值班管理-->
+    <object id="DutyContingencyNousDao" type="DAO.DutyContingencyNousDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="DutyContingencyPlansDao" type="DAO.DutyContingencyPlansDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="DutyHistoryPlansDao" type="DAO.DutyHistoryPlansDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="DutyLawsRegulationsDao" type="DAO.DutyLawsRegulationsDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="DutyPolicyFileDao" type="DAO.DutyPolicyFileDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="DutyWorkDynamicDao" type="DAO.DutyWorkDynamicDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="DutyEmergenciesDao" type="DAO.DutyEmergenciesDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--工作流, 业务类-->
+    <object id="PurchaseDao" type="DAO.PurchaseDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="PurchaseAuditDao" type="DAO.PurchaseAuditDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--辅助工具-->
+    <object id="PerScheduleDao" type="DAO.PerScheduleDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--登录日志管理-->
+    <object id="LoginLogDao" type="DAO.LoginLogDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--进销存-->
+    <object id="JXCSupplierDao" type="DAO.JXCSupplierDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="JXCMateTypeDao" type="DAO.JXCMateTypeDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="JXCMaterialDao" type="DAO.JXCMaterialDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <!--MSEC-->
+    <object id="MapPersonLocateDao" type="DAO.MapPersonLocateDao,DAO">
+    </object>
+    <object id="MsecMapAreaDao" type="DAO.MsecMapAreaDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="DeptAreaDao" type="DAO.DeptAreaDao,DAO">
+    </object>
+
+    <!--自定义表单-->
+    <object id="TplPageDao" type="DAO.TplPageDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplModuleDao" type="DAO.TplModuleDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplBindDao" type="DAO.TplBindDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplDataDao" type="DAO.TplDataDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplDescriptDao" type="DAO.TplDescriptDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplDictDao" type="DAO.TplDictDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplDictListDao" type="DAO.TplDictListDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplExprotDao" type="DAO.TplExprotDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <object id="TplQueryDao" type="DAO.TplQueryDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplProjectionDao" type="DAO.TplProjectionDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplRestrictionsDao" type="DAO.TplRestrictionsDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplFunctionsDao" type="DAO.TplFunctionsDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+
+    <object id="TplGraphDao" type="DAO.Tpl.TplGraphDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplGraphNodeBaseDao" type="DAO.Tpl.TplGraphNodeBaseDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplGraphNodeDao" type="DAO.Tpl.TplGraphNodeDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplGraphColumnDao" type="DAO.Tpl.TplGraphColumnDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="TplGraphLineDao" type="DAO.Tpl.TplGraphLineDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <!--指挥部信息-->
+    <object id="HeadQuartersDao" type="DAO.HeadQuartersDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <object id="HQPersonDao" type="DAO.HQPersonDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--事件信息-->
+    <object id="SuddenEventDao" type="DAO.SuddenEventDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <object id="WarningEventDao" type="DAO.WarningEventDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <object id="EventReportedDao" type="DAO.EventReportedDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <object id="ContinueReportDao" type="DAO.ContinueReportDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <object id="SEPersonDao" type="DAO.SEPersonDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+
+
+    <!--通讯录-->
+    <object id="ContactsDao" type="DAO.ContactsDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <object id="ContactsGroupDao" type="DAO.ContactsGroupDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <!--文档模板-->
+    <object id="DocTemplateDao" type="DAO.DocTemplateDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+    <object id="DocTemplateDataDao" type="DAO.DocTemplateDataDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--发送传真-->
+    <object id="FaxDao" type="DAO.FaxDao,DAO">
+        <property name="HibernateTemplate" ref="HibernateTemplate"/>
+    </object>
+
+    <!--慎用-->
+    <!--<object id="DbToolDao" type="DAO.DbTool.DbToolDao,DAO">
+    <property name="HibernateTemplate" ref="HibernateTemplate"/>
+  </object>-->
+
+    <!--      其他数据库            -->
+    <!--<object id="AppExapmleDao" type="DAO.AppExamleDao, DAO">
+    <property name="DbProvider" ref="DbProviderOracle"/>
+  </object>-->
+</objects>

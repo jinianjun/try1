@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+    <object id="ManagerFactory" type="DTO.AllManagerFactory,DTO">
+
+        <!---应用(企业相关)信息-->
+        <property name="applicationSrv" ref="ApplicationSrv" />
+        <property name="appConfigSrv" ref="AppConfigSrv"/>
+        <property name="appStaticDctTypeItemSrv" ref="AppStaticDctTypeItemSrv"/>
+        <property name="appStaticDctTypeSrv" ref="AppStaticDctTypeSrv"/>
+        <property name="appDctTypeItemSrv" ref="AppDctTypeItemSrv"/>
+        <property name="appDctTypeSrv" ref="AppDctTypeSrv"/>
+        <property name="appStaticMenuSrv" ref="AppStaticMenuSrv"/>
+        <property name="appMenuSrv" ref="AppMenuSrv"/>
+
+        <!--组织机构-->
+        <property name="loginUserSrv" ref="LoginUserSrv"/>
+        <property name="orgDepartSrv" ref="OrgDepartSrv"/>
+        <property name="orgPostSrv" ref="OrgPostSrv" />
+        <property name="orgPersonSrv" ref="OrgPersonSrv" />
+        <property name="orgGroupSrv" ref="OrgGroupSrv" />
+
+        <!--授权(权限)-->
+        <property name="authRoleSrv" ref="AuthRoleSrv"/>
+        <property name="authResourceSrv" ref="AuthResourceSrv"/>
+        <property name="authStaticOperateDctSrv" ref="AuthStaticOperateDctSrv"/>
+        <property name="authPermissionSrv" ref="AuthPermissionSrv"/>
+        <property name="authOperateSrv" ref="AuthOperateSrv"/>
+        <property name="authResourceUrlSrv" ref="AuthResourceUrlSrv"/>
+        <property name="authUserRoleSrv" ref="AuthUserRoleSrv"/>
+
+        <!--工作流-->
+        <property name="workFlowActivitySrv" ref="WorkFlowActivitySrv"/>
+        <property name="workFlowConfigSrv" ref="WorkFlowConfigSrv"/>
+        <property name="workFlowCurrentNodeSrv" ref="WorkFlowCurrentNodeSrv"/>
+        <property name="workFlowEntrySrv" ref="WorkFlowEntrySrv"/>
+        <property name="workFlowExpiredSrv" ref="WorkFlowExpiredSrv"/>
+        <property name="workFlowHistoryNodeSrv" ref="WorkFlowHistoryNodeSrv"/>
+        <property name="workFlowItemSrv" ref="WorkFlowItemSrv"/>
+        <property name="workFlowLineSrv" ref="WorkFlowLineSrv"/>
+        <property name="workFlowNodeSrv" ref="WorkFlowNodeSrv"/>
+        <property name="workFlowPolydotSrv" ref="WorkFlowPolydotSrv"/>
+        <property name="workFlowScriptTaskSrv" ref="WorkFlowScriptTaskSrv"/>
+        <property name="workFlowSrv" ref="WorkFlowSrv"/>
+        <property name="workFlowTaskFormSrv" ref="WorkFlowTaskFormSrv"/>
+        <property name="workFlowTaskPageSrv" ref="WorkFlowTaskPageSrv"/>
+        <property name="workFlowTaskSrv" ref="WorkFlowTaskSrv"/>
+        <property name="workFlowTaskUrlSrv" ref="WorkFlowTaskUrlSrv"/>
+        <property name="workFlowVariableSrv" ref="WorkFlowVariableSrv"/>
+        <property name="workFlowTaskUrlConfigSrv" ref="WorkFlowTaskUrlConfigSrv"/>
+
+        <!--安监信息-->
+        <property name="namedSrv" ref="NamedSrv"/>
+        <property name="nfilesSrv" ref="NfilesSrv"/>
+        <property name="noticeSrv" ref="NoticeSrv"/>
+        <property name="noticeFileSrv" ref="NoticeFileSrv"/>
+        <property name="noticePersonSrv" ref="NoticePersonSrv"/>
+        <property name="urgentReportSrv" ref="UrgentReportSrv"/>
+        <property name="urfilesSrv" ref="UrfilesSrv"/>
+
+        <!--值班管理-->
+        <property name="dutyContingencyNousSrv" ref="DutyContingencyNousSrv"/>
+        <property name="dutyContingencyPlansSrv" ref="DutyContingencyPlansSrv"/>
+        <property name="dutyHistoryPlansSrv" ref="DutyHistoryPlansSrv"/>
+        <property name="dutyLawsRegulationsSrv" ref="DutyLawsRegulationsSrv"/>
+        <property name="dutyPolicyFileSrv" ref="DutyPolicyFileSrv"/>
+        <property name="dutyWorkDynamicSrv" ref="DutyWorkDynamicSrv"/>
+        <property name="dutyEmergenciesSrv" ref="DutyEmergenciesSrv"/>
+
+        <!--工作流,辅助服务类对象-->
+        <property name="workFlowDefineSrv" ref="WorkFlowDefineSrv"/>
+        <!--工作流,业务类对象-->
+        <property name="purchaseSrv" ref="PurchaseSrv"/>
+        <property name="purchaseAuditSrv" ref="PurchaseAuditSrv"/>
+        <!--辅助工具-->
+        <property name="perScheduleSrv" ref="PerScheduleSrv"/>
+
+        <!--登录日志管理-->
+        <property name="loginLogSrv" ref="LoginLogSrv"/>
+
+        <!--地图-->
+        <property name="mapPersonLocateSrv" ref="MapPersonLocateSrv"/>
+        <property name="mapPersonSrv" ref="MapPersonSrv"/>
+
+        <!--进销存-->
+        <property name="jxcSupplierSrv" ref="JXCSupplierSrv"/>
+        <property name="jxcMateTypeSrv" ref="JXCMateTypeSrv"/>
+        <property name="jxcMaterialSrv" ref="JXCMaterialSrv"/>
+        <!--MSEC-->
+        <property name="msecMapAreaSrv" ref="MsecMapAreaSrv"/>
+        <property name="deptAreaSrv" ref="DeptAreaSrv"/>
+
+        <!--表单设计器-->
+        <property name="tplPageSrv" ref="TplPageSrv"/>
+        <property name="tplModuleSrv" ref="TplModuleSrv"/>
+        <property name="tplBindSrv" ref="TplBindSrv"/>
+        <property name="tplDataSrv" ref="TplDataSrv"/>
+        <property name="tplDescriptSrv" ref="TplDescriptSrv"/>
+        <property name="tplDictListSrv" ref="TplDictListSrv"/>
+        <property name="tplDictSrv" ref="TplDictSrv"/>
+        <property name="tplExprotSrv" ref="TplExprotSrv"/>
+        <property name="tplDictSrv" ref="TplDictSrv"/>
+        <property name="tplExprotSrv" ref="TplExprotSrv"/>
+        <property name="tplQuerySrv" ref="TplQuerySrv"/>
+        <property name="tplProjectionSrv" ref="TplProjectionSrv"/>
+        <property name="tplRestrictionsSrv" ref="TplRestrictionsSrv"/>
+        <property name="TplFunctionsSrv" ref="TplFunctionsSrv"/>
+
+
+        <property name="tplGraphSrv" ref="TplGraphSrv"/>
+        <property name="tplGraphNodeBaseSrv" ref="TplGraphNodeBaseSrv"/>
+        <property name="tplGraphColumnSrv" ref="TplGraphColumnSrv"/>
+        <property name="tplGraphNodeSrv" ref="TplGraphNodeSrv"/>
+        <property name="tplGraphLineSrv" ref="TplGraphLineSrv"/>
+        
+        <!--指挥部信息-->
+        <property name="headQuartersSrv" ref="HeadQuartersSrv"/>
+        <property name="hqPersonSrv" ref="HQPersonSrv"/>
+
+        <!--事件信息-->
+        <property name="suddenEventSrv" ref="SuddenEventSrv"/>
+        <property name="warningEventSrv" ref="WarningEventSrv"/>
+        <property name="eventReportedSrv" ref="EventReportedSrv"/>
+        <property name="continueReportSrv" ref="ContinueReportSrv"/>
+        <property name="sePersonSrv" ref="SEPersonSrv"/>
+
+        <!--通讯录-->
+        <property name="contactsGroupSrv" ref="ContactsGroupSrv"/>
+        <property name="contactsSrv" ref="ContactsSrv"/>
+
+        <!--文档模板-->
+        <property name="docTemplateSrv" ref="DocTemplateSrv"/>
+        <property name="docTemplateDataSrv" ref="DocTemplateDataSrv"/>
+        <!--各个模块数据拷贝，用于创建新企业-->
+        <property name="dupTplRestrictionsSrv" ref="DupTplRestrictionsSrv"/>
+        <property name="dupTplQuerySrv" ref="DupTplQuerySrv"/>
+        <property name="dupTplProjectionSrv" ref="DupTplProjectionSrv"/>
+        <property name="dupTplExprotSrv" ref="DupTplExprotSrv"/>
+        <property name="dupTplDescriptTplBindSrv" ref="DupTplDescriptTplBindSrv"/>
+        <property name="duplicateTplPageSrv" ref="DuplicateTplPageSrv"/>
+
+        <property name="dupAppDctTypeItemSrv" ref="DupAppDctTypeItemSrv"/>
+        <property name="dupAppDctTypeSrv" ref="DupAppDctTypeSrv"/>
+        <property name="dupApplicationSrv" ref="DupApplicationSrv"/>
+        <property name="dupAppMenuSrv" ref="DupAppMenuSrv"/>
+        <property name="dupAuthOperateSrv" ref="DupAuthOperateSrv"/>
+        <property name="dupAuthPermissionSrv" ref="DupAuthPermissionSrv"/>
+        <property name="dupAuthResourceSrv" ref="DupAuthResourceSrv"/>
+        <property name="dupAuthRoleSrv" ref="DupAuthRoleSrv"/>
+        <property name="dupAuthStaticOperateDctSrv" ref="DupAuthStaticOperateDctSrv"/>
+
+
+
+
+        <!--发送传真-->
+        <property name="faxSrv" ref="FaxSrv"/>
+
+        <!--慎用-->
+        <!--<property name="dbToolSrv" ref="DbToolSrv"/>-->
+        <!--<property name="appExamleSrv" ref="AppExamleSrv"/>-->
+    </object>
+</objects>
+
+
+

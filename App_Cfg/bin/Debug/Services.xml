@@ -1,0 +1,797 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:tx="http://www.springframework.net/tx">
+
+    <object id="transactionManager"
+          type="Spring.Data.NHibernate.HibernateTransactionManager, Spring.Data.NHibernate31">
+        <property name="DbProvider" ref="DbProvider"/>
+        <property name="SessionFactory" ref="NHibernateSessionFactory"/>
+    </object>
+
+    <object type="Spring.Aop.Framework.AutoProxy.ObjectNameAutoProxyCreator,Spring.Aop">
+        <property name="ObjectNames">
+            <list>
+                <value>*Srv</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>TransactionInterceptor</value>
+            </list>
+        </property>
+    </object>
+
+    <object id="TransactionInterceptor" type="Spring.Transaction.Interceptor.TransactionInterceptor, Spring.Data">
+        <property name="TransactionManager" ref="transactionManager"/>
+        <property name="transactionAttributes">
+            <name-values>
+                <add key="Save*" value="PROPAGATION_REQUIRED"/>
+                <add key="Set*" value="PROPAGATION_REQUIRED"/>
+                <add key="Finish*" value="PROPAGATION_REQUIRED"/>
+                <add key="Update*" value="PROPAGATION_REQUIRED"/>
+                <add key="Delete*" value="PROPAGATION_REQUIRED"/>
+                <add key="Add*" value="PROPAGATION_REQUIRED"/>
+                <add key="Get*" value="PROPAGATION_REQUIRED,readOnly"/>
+                <add key="Find*" value="PROPAGATION_REQUIRED,readOnly"/>
+                <add key="Load*" value="PROPAGATION_REQUIRED,readOnly"/>
+                <add key="*" value="PROPAGATION_REQUIRED"/>
+                <!--事务策略定义-->
+            </name-values>
+        </property>
+    </object>
+
+    <!--事务切面-->
+    <tx:attribute-driven/>
+
+    <!-- Property placeholder configurer for database settings -->
+    <!--<object id="AppBaseSrv" type="Service.LoginUserSrv,Service">
+    <property name="AppBaseDao" ref="LoginUserDao"/>
+  </object>-->
+
+
+    <!--应用(企业相关)信息-->
+    <object id="ApplicationSrv" type="Service.ApplicationSrv,Service">
+        <property name="BaseDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+    </object>
+    <object id="AppConfigSrv" type="Service.AppConfigSrv,Service">
+        <property name="BaseDao" ref="AppConfigDao"/>
+    </object>
+    <object id="AppMenuSrv" type="Service.AppMenuSrv,Service">
+        <property name="BaseDao" ref="AppMenuDao"/>
+    </object>
+    <object id="AppStaticMenuSrv" type="Service.AppStaticMenuSrv,Service">
+        <property name="BaseDao" ref="AppStaticMenuDao"/>
+    </object>
+    <object id="AppStaticDctTypeItemSrv" type="Service.AppStaticDctTypeItemSrv,Service">
+        <property name="BaseDao" ref="AppStaticDctTypeItemDao"/>
+    </object>
+    <object id="AppStaticDctTypeSrv" type="Service.AppStaticDctTypeSrv,Service">
+        <property name="BaseDao" ref="AppStaticDctTypeDao"/>
+    </object>
+    <object id="AppDctTypeItemSrv" type="Service.AppDctTypeItemSrv,Service">
+        <property name="BaseDao" ref="AppDctTypeItemDao"/>
+    </object>
+    <object id="AppDctTypeSrv" type="Service.AppDctTypeSrv,Service">
+        <property name="BaseDao" ref="AppDctTypeDao"/>
+    </object>
+
+
+    <!--组织机构-->
+
+    <object id="LoginUserSrv" type="Service.LoginUserSrv,Service">
+        <property name="BaseDao" ref="LoginUserDao"/>
+    </object>
+    <object id="OrgDepartSrv" type="Service.OrgDepartSrv,Service">
+        <property name="BaseDao" ref="OrgDepartDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="applicationDao" ref="ApplicationDao"/>
+    </object>
+    <object id="OrgPostSrv" type="Service.OrgPostSrv,Service">
+        <property name="BaseDao" ref="OrgPostDao"/>
+    </object>
+    <object id="OrgPersonSrv" type="Service.OrgPersonSrv,Service">
+        <property name="BaseDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="OrgGroupSrv" type="Service.OrgGroupSrv,Service">
+        <property name="BaseDao" ref="OrgGroupDao"/>
+    </object>
+
+    <!--安监信息-->
+    <object id="NamedSrv" type="Service.NamedSrv,Service">
+        <property name="BaseDao" ref="NamedDao"/>
+    </object>
+    <object id="NfilesSrv" type="Service.NfilesSrv,Service">
+        <property name="BaseDao" ref="NfilesDao"/>
+    </object>
+    <object id="NoticeSrv" type="Service.NoticeSrv,Service">
+        <property name="BaseDao" ref="NoticeDao"/>
+        <property name="noticeFileDao" ref="NoticeFileDao"/>
+        <property name="noticePersonDao" ref="NoticePersonDao"/>
+    </object>
+    <object id="NoticeFileSrv" type="Service.NoticeFileSrv,Service">
+        <property name="BaseDao" ref="NoticeFileDao"/>
+    </object>
+    <object id="NoticePersonSrv" type="Service.NoticePersonSrv,Service">
+        <property name="BaseDao" ref="NoticePersonDao"/>
+    </object>
+    <object id="UrgentReportSrv" type="Service.UrgentReportSrv,Service">
+        <property name="BaseDao" ref="UrgentReportDao"/>
+    </object>
+    <object id="UrfilesSrv" type="Service.UrfilesSrv,Service">
+        <property name="BaseDao" ref="UrfilesDao"/>
+    </object>
+
+    <!--值班管理-->
+    <object id="DutyContingencyNousSrv" type="Service.DutyContingencyNousSrv,Service">
+        <property name="BaseDao" ref="DutyContingencyNousDao"/>
+    </object>
+    <object id="DutyContingencyPlansSrv" type="Service.DutyContingencyPlansSrv,Service">
+        <property name="BaseDao" ref="DutyContingencyPlansDao"/>
+        <property name="historyDao" ref="DutyHistoryPlansDao"/>
+    </object>
+    <object id="DutyHistoryPlansSrv" type="Service.DutyHistoryPlansSrv,Service">
+        <property name="BaseDao" ref="DutyHistoryPlansDao"/>
+    </object>
+    <object id="DutyLawsRegulationsSrv" type="Service.DutyLawsRegulationsSrv,Service">
+        <property name="BaseDao" ref="DutyLawsRegulationsDao"/>
+    </object>
+    <object id="DutyPolicyFileSrv" type="Service.DutyPolicyFileSrv,Service">
+        <property name="BaseDao" ref="DutyPolicyFileDao"/>
+    </object>
+    <object id="DutyWorkDynamicSrv" type="Service.DutyWorkDynamicSrv,Service">
+        <property name="BaseDao" ref="DutyWorkDynamicDao"/>
+    </object>
+    <object id="DutyEmergenciesSrv" type="Service.DutyEmergenciesSrv,Service">
+        <property name="BaseDao" ref="DutyEmergenciesDao"/>
+    </object>
+
+    <!--授权(权限)-->
+    <object id="AuthRoleSrv" type="Service.AuthRoleSrv,Service">
+        <property name="BaseDao" ref="AuthRoleDao"/>
+    </object>
+    <object id="AuthResourceSrv" type="Service.AuthResourceSrv,Service">
+        <property name="BaseDao" ref="AuthResourceDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+    </object>
+    <object id="AuthStaticOperateDctSrv" type="Service.AuthStaticOperateDctSrv,Service">
+        <property name="BaseDao" ref="AuthStaticOperateDctDao"/>
+    </object>
+    <object id="AuthPermissionSrv" type="Service.AuthPermissionSrv,Service">
+        <property name="BaseDao" ref="AuthPermissionDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+    </object>
+    <object id="AuthOperateSrv" type="Service.AuthOperateSrv,Service">
+        <property name="BaseDao" ref="AuthOperateDao"/>
+    </object>
+    <object id="AuthResourceUrlSrv" type="Service.AuthResourceUrlSrv,Service">
+        <property name="BaseDao" ref="AuthResourceUrlDao"/>
+    </object>
+    <object id="AuthUserRoleSrv" type="Service.AuthUserRoleSrv,Service">
+        <property name="orgdepartDao" ref="OrgDepartDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="applicationDao" ref="ApplicationDao"/>
+    </object>
+
+    <!--工作流-->
+    <object id="WorkFlowActivitySrv" type="Service.WorkFlowActivitySrv,Service">
+        <property name="BaseDao" ref="WorkFlowActivityDao"/>
+    </object>
+    <object id="WorkFlowConfigSrv" type="Service.WorkFlowConfigSrv,Service">
+        <property name="BaseDao" ref="WorkFlowConfigDao"/>
+    </object>
+    <object id="WorkFlowCurrentNodeSrv" type="Service.WorkFlowCurrentNodeSrv,Service">
+        <property name="BaseDao" ref="WorkFlowCurrentNodeDao"/>
+    </object>
+    <object id="WorkFlowEntrySrv" type="Service.WorkFlowEntrySrv,Service">
+        <property name="BaseDao" ref="WorkFlowEntryDao"/>
+        <property name="workFlowConfigDao" ref="WorkFlowConfigDao"/>
+        <property name="workFlowNodeDao" ref="WorkFlowNodeDao"/>
+        <property name="workFlowCurrentNodeDao" ref="WorkFlowCurrentNodeDao"/>
+        <property name="workFlowHistoryNodeDao" ref="WorkFlowHistoryNodeDao"/>
+        <property name="workFlowItemDao" ref="WorkFlowItemDao"/>
+        <property name="workFlowNodeSrv" ref="WorkFlowNodeSrv"/>
+        <property name="workFlowDefineSrv" ref="WorkFlowDefineSrv"/>
+    </object>
+    <object id="WorkFlowExpiredSrv" type="Service.WorkFlowExpiredSrv,Service">
+        <property name="BaseDao" ref="WorkFlowExpiredDao"/>
+    </object>
+    <object id="WorkFlowHistoryNodeSrv" type="Service.WorkFlowHistoryNodeSrv,Service">
+        <property name="BaseDao" ref="WorkFlowHistoryNodeDao"/>
+    </object>
+    <object id="WorkFlowItemSrv" type="Service.WorkFlowItemSrv,Service">
+        <property name="BaseDao" ref="WorkFlowItemDao"/>
+        <property name="purchaseDao" ref="PurchaseDao"/>
+        <property name="workFlowCurrentNodeDao" ref="WorkFlowCurrentNodeDao"/>
+    </object>
+    <object id="WorkFlowLineSrv" type="Service.WorkFlowLineSrv,Service">
+        <property name="BaseDao" ref="WorkFlowLineDao"/>
+    </object>
+    <object id="WorkFlowNodeSrv" type="Service.WorkFlowNodeSrv,Service">
+        <property name="BaseDao" ref="WorkFlowNodeDao"/>
+    </object>
+    <object id="WorkFlowPolydotSrv" type="Service.WorkFlowPolydotSrv,Service">
+        <property name="BaseDao" ref="WorkFlowPolydotDao"/>
+    </object>
+    <object id="WorkFlowScriptTaskSrv" type="Service.WorkFlowScriptTaskSrv,Service">
+        <property name="BaseDao" ref="WorkFlowScriptTaskDao"/>
+    </object>
+    <object id="WorkFlowSrv" type="Service.WorkFlowSrv,Service">
+        <property name="BaseDao" ref="WorkFlowDao"/>
+        <property name="workFlowPolydotDao" ref="WorkFlowPolydotDao"/>
+        <property name="workFlowNodeDao" ref="WorkFlowNodeDao"/>
+        <property name="workFlowLineDao" ref="WorkFlowLineDao"/>
+        <property name="workFlowConfigDao" ref="WorkFlowConfigDao"/>
+        <property name="workFlowTaskDao" ref="WorkFlowTaskDao"/>
+        <property name="workFlowScriptTaskDao" ref="WorkFlowScriptTaskDao"/>
+    </object>
+    <object id="WorkFlowTaskFormSrv" type="Service.WorkFlowTaskFormSrv,Service">
+        <property name="BaseDao" ref="WorkFlowTaskFormDao"/>
+    </object>
+    <object id="WorkFlowTaskPageSrv" type="Service.WorkFlowTaskPageSrv,Service">
+        <property name="BaseDao" ref="WorkFlowTaskPageDao"/>
+    </object>
+    <object id="WorkFlowTaskSrv" type="Service.WorkFlowTaskSrv,Service">
+        <property name="BaseDao" ref="WorkFlowTaskDao"/>
+    </object>
+    <object id="WorkFlowTaskUrlSrv" type="Service.WorkFlowTaskUrlSrv,Service">
+        <property name="BaseDao" ref="WorkFlowTaskUrlDao"/>
+    </object>
+    <object id="WorkFlowVariableSrv" type="Service.WorkFlowVariableSrv,Service">
+        <property name="BaseDao" ref="WorkFlowVariableDao"/>
+    </object>
+    <object id="WorkFlowTaskUrlConfigSrv" type="Service.WorkFlowTaskUrlConfigSrv,Service">
+        <property name="BaseDao" ref="WorkFlowTaskUrlConfigDao"/>
+    </object>
+    <!--工作流, 辅助服务类-->
+    <object id="WorkFlowDefineSrv" type="Service.WorkFlowDefineSrv,Service">
+        <property name="workFlowNodeDao" ref="WorkFlowNodeDao"/>
+    </object>
+    <!--工作流, 业务类-->
+    <object id="PurchaseSrv" type="Service.PurchaseSrv,Service">
+        <property name="BaseDao" ref="PurchaseDao"/>
+    </object>
+    <object id="PurchaseAuditSrv" type="Service.PurchaseAuditSrv,Service">
+        <property name="BaseDao" ref="PurchaseAuditDao"/>
+    </object>
+    <!--辅助工具-->
+    <object id="PerScheduleSrv" type="Service.PerScheduleSrv,Service">
+        <property name="BaseDao" ref="PerScheduleDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+    </object>
+
+    <!--登录日志管理-->
+    <object id="LoginLogSrv" type="Service.LoginLogSrv,Service">
+        <property name="BaseDao" ref="LoginLogDao"/>
+    </object>
+
+    <!--地图-->
+    <object id="MapPersonSrv" type="Service.MapPersonSrv,Service">
+        <property name="orgdepartDao" ref="OrgDepartDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="applicationDao" ref="ApplicationDao"/>
+    </object>
+
+    <!--进销存-->
+    <object id="JXCSupplierSrv" type="Service.JXCSupplierSrv,Service">
+        <property name="BaseDao" ref="JXCSupplierDao"/>
+    </object>
+    <object id="JXCMateTypeSrv" type="Service.JXCMateTypeSrv,Service">
+        <property name="BaseDao" ref="JXCMateTypeDao"/>
+    </object>
+    <object id="JXCMaterialSrv" type="Service.JXCMaterialSrv,Service">
+        <property name="BaseDao" ref="JXCMaterialDao"/>
+        <property name="jxcMateTypeDao" ref="JXCMateTypeDao"/>
+    </object>
+    <!--MSEC-->
+    <object id="MapPersonLocateSrv" type="Service.MapPersonLocateSrv,Service">
+        <property name="mpld" ref="MapPersonLocateDao"/>
+    </object>
+    <object id="MsecMapAreaSrv" type="Service.MsecMapAreaSrv,Service">
+        <property name="BaseDao" ref="MsecMapAreaDao"/>
+    </object>
+    <object id="DeptAreaSrv" type="Service.DeptAreaSrv,Service">
+        <property name="deptAreaDao" ref="DeptAreaDao"/>
+        <property name="msecmapdao" ref="MsecMapAreaDao"/>
+        <property name="orgDepartDao" ref="OrgDepartDao"/>
+    </object>
+
+    <!--自定义表单-->
+    <object id="TplPageSrv" type="Service.TplPageSrv,Service">
+        <property name="BaseDao" ref="TplPageDao"/>
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+    </object>
+    <object id="TplModuleSrv" type="Service.TplModuleSrv,Service">
+        <property name="BaseDao" ref="TplModuleDao"/>
+    </object>
+    <object id="TplBindSrv" type="Service.TplBindSrv,Service">
+        <property name="BaseDao" ref="TplBindDao"/>
+    </object>
+    <object id="TplDataSrv" type="Service.TplDataSrv,Service">
+        <property name="BaseDao" ref="TplDataDao"/>
+        <property name="tplModuleDao" ref="TplModuleDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+    </object>
+    <object id="TplDescriptSrv" type="Service.TplDescriptSrv,Service">
+        <property name="BaseDao" ref="TplDescriptDao"/>
+        <property name="tplBindDao" ref="TplBindDao"/>
+    </object>
+    <object id="TplDictListSrv" type="Service.TplDictListSrv,Service">
+        <property name="BaseDao" ref="TplDictListDao"/>
+    </object>
+    <object id="TplDictSrv" type="Service.TplDictSrv,Service">
+        <property name="BaseDao" ref="TplDictDao"/>
+    </object>
+    <object id="TplExprotSrv" type="Service.TplExprotSrv,Service">
+        <property name="BaseDao" ref="TplExprotDao"/>
+    </object>
+    <object id="TplQuerySrv" type="Service.TplQuerySrv,Service">
+        <property name="BaseDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+    </object>
+    <object id="TplProjectionSrv" type="Service.TplProjectionSrv,Service">
+        <property name="BaseDao" ref="TplProjectionDao"/>
+    </object>
+    <object id="TplRestrictionsSrv" type="Service.TplRestrictionsSrv,Service">
+        <property name="BaseDao" ref="TplRestrictionsDao"/>
+    </object>
+    <object id="TplFunctionsSrv" type="Service.TplFunctionsSrv,Service">
+        <property name="BaseDao" ref="TplFunctionsDao"/>
+    </object>
+
+
+    <object id="TplGraphSrv" type="Service.Tpl.TplGraphSrv,Service">
+        <property name="BaseDao" ref="TplGraphDao"/>
+    </object>
+    <object id="TplGraphNodeSrv" type="Service.Tpl.TplGraphNodeSrv,Service">
+        <property name="BaseDao" ref="TplGraphNodeDao"/>
+        <property name="TplModuleDao" ref="TplModuleDao"/>
+        <property name="TplDescriptDao" ref="TplDescriptDao"/>
+        <property name="TplGraphColumnDao" ref="TplGraphColumnDao"/>
+        <property name="TplGraphLineDao" ref="TplGraphLineDao"/>
+        <property name="TplGraphDao" ref="TplGraphDao"/>
+    </object>
+    <object id="TplGraphColumnSrv" type="Service.Tpl.TplGraphColumnSrv,Service">
+        <property name="BaseDao" ref="TplGraphColumnDao"/>
+    </object>
+    <object id="TplGraphNodeBaseSrv" type="Service.Tpl.TplGraphNodeBaseSrv,Service">
+        <property name="BaseDao" ref="TplGraphNodeBaseDao"/>
+    </object>
+    <object id="TplGraphLineSrv" type="Service.Tpl.TplGraphLineSrv,Service">
+        <property name="BaseDao" ref="TplGraphLineDao"/>
+    </object>
+    
+
+
+    <!--各个模块数据拷贝，用于创建新企业-->
+    <object id="DupTplDescriptTplBindSrv" type="Service.DupTplDescriptTplBindSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+
+
+    </object>
+    <object id="DuplicateTplPageSrv" type="Service.DuplicateTplPageSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupTplExprotSrv" type="Service.DupTplExprotSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupTplProjectionSrv" type="Service.DupTplProjectionSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupTplQuerySrv" type="Service.DupTplQuerySrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupTplRestrictionsSrv" type="Service.DupTplRestrictionsSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+
+
+    <object id="DupAppDctTypeItemSrv" type="Service.DupAppDctTypeItemSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+
+
+    <object id="DupAppDctTypeSrv" type="Service.DupAppDctTypeSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupApplicationSrv" type="Service.DupApplicationSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupAppMenuSrv" type="Service.DupAppMenuSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupAuthOperateSrv" type="Service.DupAuthOperateSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupAuthPermissionSrv" type="Service.DupAuthPermissionSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupAuthResourceSrv" type="Service.DupAuthResourceSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupAuthRoleSrv" type="Service.DupAuthRoleSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+    <object id="DupAuthStaticOperateDctSrv" type="Service.DupAuthStaticOperateDctSrv,Service">
+        <property name="tplBindDao" ref="TplBindDao"/>
+        <property name="tplDescriptDao" ref="TplDescriptDao"/>
+        <property name="tplModuleDao" ref="AppMenuDao"/>
+        <property name="tplPageDao" ref="TplPageDao"/>
+        <property name="tplExprotDao" ref="TplExprotDao"/>
+        <property name="tplProjectionDao" ref="TplProjectionDao"/>
+        <property name="tplQueryDao" ref="TplQueryDao"/>
+        <property name="tplRestrictionsDao" ref="TplRestrictionsDao"/>
+
+        <property name="applicationDao" ref="ApplicationDao"/>
+        <property name="appConfigDao" ref="AppConfigDao"/>
+        <property name="appDctTypeDao" ref="AppDctTypeDao"/>
+        <property name="appDctTypeItemDao" ref="AppDctTypeItemDao"/>
+        <property name="appMenuDao" ref="AppMenuDao"/>
+        <property name="authPermissionDao" ref="AuthPermissionDao"/>
+        <property name="authResourceDao" ref="AuthResourceDao"/>
+        <property name="authStaticOperateDctDao" ref="AuthStaticOperateDctDao"/>
+        <property name="authRoleDao" ref="AuthRoleDao"/>
+        <property name="authOperateDao" ref="AuthOperateDao"/>
+        <property name="orgPersonDao" ref="OrgPersonDao"/>
+        <property name="loginUserDao" ref="LoginUserDao"/>
+    </object>
+
+    <!--指挥部信息-->
+    <object id="HeadQuartersSrv" type="Service.HeadQuartersSrv,Service">
+        <property name="BaseDao" ref="HeadQuartersDao"/>
+    </object>
+    <object id="HQPersonSrv" type="Service.HQPersonSrv,Service">
+        <property name="BaseDao" ref="HQPersonDao"/>
+    </object>
+
+    <!--事件信息-->
+    <object id="SuddenEventSrv" type="Service.SuddenEventSrv,Service">
+        <property name="BaseDao" ref="SuddenEventDao"/>
+    </object>
+    <object id="WarningEventSrv" type="Service.WarningEventSrv,Service">
+        <property name="BaseDao" ref="WarningEventDao"/>
+    </object>
+
+    <object id="EventReportedSrv" type="Service.EventReportedSrv,Service">
+        <property name="BaseDao" ref="EventReportedDao"/>
+    </object>
+
+    <object id="ContinueReportSrv" type="Service.ContinueReportSrv,Service">
+        <property name="BaseDao" ref="ContinueReportDao"/>
+    </object>
+
+    <object id="SEPersonSrv" type="Service.SEPersonSrv,Service">
+        <property name="BaseDao" ref="SEPersonDao"/>
+    </object>
+
+
+    <!--通讯录-->
+    <object id="ContactsGroupSrv" type="Service.ContactsGroupSrv,Service">
+        <property name="BaseDao" ref="ContactsGroupDao"/>
+        <property name="contactsDao" ref="ContactsDao"/>
+    </object>
+    <object id="ContactsSrv" type="Service.ContactsSrv,Service">
+        <property name="BaseDao" ref="ContactsDao"/>
+    </object>
+
+    <!--文档模板-->
+    <object id="DocTemplateSrv" type="Service.DocTemplateSrv,Service">
+        <property name="BaseDao" ref="DocTemplateDao"/>
+    </object>
+    <object id="DocTemplateDataSrv" type="Service.DocTemplateDataSrv,Service">
+        <property name="BaseDao" ref="DocTemplateDataDao"/>
+    </object>
+
+    <!--发送传真-->
+    <object id="FaxSrv" type="Service.FaxSrv,Service">
+        <property name="BaseDao" ref="FaxDao"/>
+    </object>
+
+
+    <!--慎用-->
+    <!--<object id="DbToolSrv" type="Service.DbTool.DbToolSrv,Service">
+      <property name="dbToolDao" ref="DbToolDao"/>    
+  </object>-->
+
+    <!--<object id="AppExamleSrv" type="Service.AppExamleSrv,Service">
+    <property name="appExapmleDao" ref="AppExapmleDao"/>  
+  </object>-->
+
+
+
+</objects>
