@@ -23,6 +23,12 @@ using AppBase.Commons.Core;
 
 
 
+
+
+
+
+
+
 namespace DAO
 {
     public delegate T ObjectMapperDelegate<T>(NamedNullMappingDataReader readerEx);
